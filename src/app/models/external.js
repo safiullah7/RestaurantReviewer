@@ -1,9 +1,9 @@
-[
+export default [
     {
-       "restaurantName":"KWC Grill Burgers",
-       "address":"Karim Block Umar Block Allama Iqbal Town, Lahore, Punjab, Pakistan",
-       "lat":31.507341,
-       "long":74.280161,
+       "restaurantName":"Bronco",
+       "address":"39 Rue des Petites Écuries, 75010 Paris",
+       "lat":48.8737815,
+       "long":2.3501649,
        "ratings":[
           {
              "stars":4,
@@ -16,10 +16,10 @@
        ]
     },
     {
-       "restaurantName":"Pizza 21",
-       "address":"Noor-ul-Amin Rd, Umer Block Umar Block Allama Iqbal Town, Lahore, Punjab 54000, Pakistan",
-       "lat":31.508169,
-       "long":74.279925,
+       "restaurantName":"Babalou",
+       "address":"4 Rue Lamarck, 75018 Paris",
+       "lat":48.8865035,
+       "long":2.3442197,
        "ratings":[
           {
              "stars":5,

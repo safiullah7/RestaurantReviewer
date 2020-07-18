@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Grid } from 'semantic-ui-react';
-import Restaurant from '../../features/maps/restaurant';
+import { Grid, Segment } from 'semantic-ui-react';
+import Restaurant from '../models/restaurant.js';
+import jsonData from '../models/external.json';
+import RestaurantList from '../../features/restaurants/RestaurantList';
+import MapDisplayer from '../../features/maps/MapDisplayer';
 
-function App() {
+const App = () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+
+  useEffect(() => {
+    let rests = [];
+    jsonData.map((res) => {
+      let r = new Restaurant(res.restaurantName, res.address, res.lat, res.long, res.ratings);
+      rests.push(r);
+    });
+    setRestaurants(rests);
+  }, [jsonData])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -12,10 +27,12 @@ function App() {
       {/* AIzaSyCWlhjBQDtztfsfYBMFBhhe7fq4ss81HFw */}
       <Grid>
         <Grid.Column width={12}>
-          <Restaurant />
+          <MapDisplayer restaurants={restaurants} />
         </Grid.Column>
         <Grid.Column width={4}>
-          Restaurants Area
+          <Segment>
+            {restaurants && <RestaurantList restaurants={restaurants} />}
+          </Segment>
         </Grid.Column>
       </Grid>
     </div>
