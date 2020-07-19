@@ -10,6 +10,13 @@ const App = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
+  const addReview = (updatedRestaurant) => {
+    const rests = restaurants.filter(rest => rest.restaurantName !== updatedRestaurant.restaurantName && 
+          rest.address !== updatedRestaurant.address && rest.lat !== updatedRestaurant.lat && rest.long !== updatedRestaurant.long);
+    rests.push(updatedRestaurant);
+    setRestaurants(rests);
+  }
+
   useEffect(() => {
     let rests = [];
     jsonData.map((res) => {
@@ -31,7 +38,7 @@ const App = () => {
         </Grid.Column>
         <Grid.Column width={4}>
           <Segment>
-            {restaurants && <RestaurantList restaurants={restaurants} />}
+            {restaurants && <RestaurantList addReview={addReview} restaurants={restaurants} />}
           </Segment>
         </Grid.Column>
       </Grid>
