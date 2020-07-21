@@ -5,10 +5,8 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import L from "leaflet";
 
 const MapDisplayer = ({restaurants}) => {
-    const position = [31.507341, 74.280161];
+    // const position = [31.507341, 74.380161];
     const [currentLocation, setCurrentLocation] = useState(null);
-    let lat = null;
-    let long = null;
     
     const customMarker = new L.icon({
       iconUrl: "https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png",
@@ -26,8 +24,6 @@ const MapDisplayer = ({restaurants}) => {
         // location.coords.accuracy;
         console.log(curLoc);
         setCurrentLocation(curLoc);
-        lat = location.coords.latitude;
-        long = location.coords.longitude;
       });
     }, [navigator.geolocation.getCurrentPosition])
     return (

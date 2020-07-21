@@ -10,7 +10,7 @@ const CommentListItem = ({rating}) => {
         <List.Description>
           {rating.comment}
         </List.Description>
-        <Rating icon='star' defaultRating={rating.stars} maxRating={5} />
+        <Rating icon='star' disabled defaultRating={rating.stars} maxRating={5} />
       </List.Content>
     </List.Item>
   );

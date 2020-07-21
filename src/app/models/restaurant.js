@@ -6,6 +6,8 @@ export default class Restaurant {
         this.lat = lat;
         this.long = long;
         this.ratings = ratings;
+        // avgRating
+        // noOfRatings
     }
 
     getAverageRating() {

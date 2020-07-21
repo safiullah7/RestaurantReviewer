@@ -11,10 +11,7 @@ const App = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   const addReview = (updatedRestaurant) => {
-    const rests = restaurants.filter(rest => rest.restaurantName !== updatedRestaurant.restaurantName && 
-          rest.address !== updatedRestaurant.address && rest.lat !== updatedRestaurant.lat && rest.long !== updatedRestaurant.long);
-    rests.push(updatedRestaurant);
-    setRestaurants(rests);
+    // setRestaurants(restaurants);
   }
 
   useEffect(() => {

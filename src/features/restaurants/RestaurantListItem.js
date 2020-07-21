@@ -15,6 +15,7 @@ const RestaurantListItem = ({ addReview, restuarant }) => {
   const [clicked, setClicked] = useState(false);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+  const [avgRating, setAvgRating] = useState(restuarant.getAverageRating());
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -24,6 +25,7 @@ const RestaurantListItem = ({ addReview, restuarant }) => {
     const review = {"stars": rating, "comment": comment};
     restuarant.ratings.push(review);
     addReview(restuarant);
+    setAvgRating(restuarant.getAverageRating());
     setComment('');
     setRating(0);
   };
@@ -44,7 +46,8 @@ const RestaurantListItem = ({ addReview, restuarant }) => {
             Average rating:{" "}
             <Rating
               icon="star"
-              defaultRating={restuarant.getAverageRating()}
+              disabled
+              rating={avgRating}
               maxRating={5}
             />
           </Item.Description>
@@ -76,7 +79,7 @@ const RestaurantListItem = ({ addReview, restuarant }) => {
                     <Item.Extra>
                       <Rating
                         icon='star'
-                        defaultRating={rating}
+                        rating={rating}
                         maxRating={5}
                         onRate={(e, { rating, maxRating }) => setRating(rating)}
                       />
