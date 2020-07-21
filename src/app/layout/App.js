@@ -9,9 +9,24 @@ import MapDisplayer from '../../features/maps/MapDisplayer';
 const App = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [body, setBody] = useState(null);
+  const [count, setCount] = useState(0);
 
   const addReview = (updatedRestaurant) => {
     // setRestaurants(restaurants);
+  }
+
+  const addRestaurant = (restaurant) => {
+    debugger;
+    let rests = restaurants;
+    rests.push(restaurant)
+    setRestaurants(rests);
+    setCount(count + 1);
+  }
+
+  const closeModal = () => {
+    setOpen(false);
   }
 
   useEffect(() => {
@@ -21,7 +36,7 @@ const App = () => {
       rests.push(r);
     });
     setRestaurants(rests);
-  }, [jsonData])
+  }, [jsonData, count])
 
   return (
     <div className="App">
@@ -31,7 +46,7 @@ const App = () => {
       {/* AIzaSyCWlhjBQDtztfsfYBMFBhhe7fq4ss81HFw */}
       <Grid>
         <Grid.Column width={12}>
-          <MapDisplayer restaurants={restaurants} />
+          <MapDisplayer restaurants={restaurants} addRestaurant={addRestaurant} setOpen={setOpen} setBody={setBody} />
         </Grid.Column>
         <Grid.Column width={4}>
           <Segment>

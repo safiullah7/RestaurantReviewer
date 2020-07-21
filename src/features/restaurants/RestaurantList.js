@@ -1,6 +1,5 @@
 import React from 'react'
 import RestaurantListItem from './RestaurantListItem'
-import { Segment } from 'semantic-ui-react'
 
 const RestaurantList = ({addReview, restaurants}) => {
     return (

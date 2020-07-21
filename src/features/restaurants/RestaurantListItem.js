@@ -5,8 +5,6 @@ import {
   Icon,
   Rating,
   Segment,
-  Button,
-  TextArea,
   Form,
 } from "semantic-ui-react";
 import CommentList from "./CommentList";
