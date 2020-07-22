@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import {
   Segment,
   Item,
@@ -19,7 +19,7 @@ const RestaurantListItemDetails = ({ addReview, restaurant, setClicked, setDetai
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [avgRating, setAvgRating] = useState(restaurant.avgRating);
-  setDetailsView(true);
+  // setDetailsView(true);
 
   const handleSubmit = () => {
     const review = { stars: rating, comment: comment };
@@ -34,6 +34,10 @@ const RestaurantListItemDetails = ({ addReview, restaurant, setClicked, setDetai
     setClicked(false);
     setDetailsView(false);
   };
+
+  useEffect(() => {
+    setDetailsView(true);
+  }, [setDetailsView])
 
   return (
     <div style={{ marginTop: '1em', overflow: 'auto', maxHeight: '100vh' }}>

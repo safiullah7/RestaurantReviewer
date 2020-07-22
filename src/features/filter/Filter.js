@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dropdown, Divider, Button } from 'semantic-ui-react';
 
 const Filter = ({minRating, setMinRating, maxRating, setMaxRating, filterRestaurants}) => {
+
+    // const [mindd, setMindd] = useState(false);
+    // const [maxdd, setMaxdd] = useState(false);
     
     const options = [
+        {
+            key: '0star',
+            text: '0 Star',
+            value: '0',
+        },
         {
             key: '1star',
             text: '1 Star',
@@ -32,12 +40,14 @@ const Filter = ({minRating, setMinRating, maxRating, setMaxRating, filterRestaur
     ];
     
     const handleChangeMin = (e, { value }) => {
-        setMinRating(+(value));
+        setMinRating(value);
         // filterRestaurants();
+        // setMindd(true);
     }
     const handleChangeMax = (e, { value }) => {
-        setMaxRating(+(value));
+        setMaxRating(value);
         // filterRestaurants();
+        // setMaxdd(true);
     }
     return (
         <div style={{marginTop: '1em'}}>
@@ -48,7 +58,9 @@ const Filter = ({minRating, setMinRating, maxRating, setMaxRating, filterRestaur
                 selection
                 options={options}
                 onChange={handleChangeMin}
-                selectedLabel={minRating}
+                
+                value={minRating}
+                // selectedLabel={minRating}
             />{' '}
             <Dropdown
                 placeholder='Maximum Rating'
@@ -57,7 +69,8 @@ const Filter = ({minRating, setMinRating, maxRating, setMaxRating, filterRestaur
                 selection
                 options={options}
                 onChange={handleChangeMax}
-                selectedLabel={maxRating}
+                value={maxRating}
+                // selectedLabel={maxRating}
             /> <br/>
             <Button
                 style={{marginTop: '1em'}}
@@ -66,6 +79,7 @@ const Filter = ({minRating, setMinRating, maxRating, setMaxRating, filterRestaur
                 labelPosition="right"
                 content="Apply"
                 onClick={filterRestaurants}
+                // disabled={!(mindd && maxdd)}
             />
             <Divider />
         </div>

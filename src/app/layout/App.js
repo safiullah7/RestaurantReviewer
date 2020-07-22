@@ -13,16 +13,12 @@ const App = () => {
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState(null);
   const [count, setCount] = useState(0);
-  const [minRating, setMinRating] = useState(0);
-  const [maxRating, setMaxRating] = useState(0);
+  const [minRating, setMinRating] = useState('');
+  const [maxRating, setMaxRating] = useState('');
   const [detailsView, setDetailsView] = useState(false);
 
   const addReview = (updatedRestaurant, review) => {
     // setRestaurants(restaurants);
-    const restaurant = restaurants.filter(res => res.restaurantName === updatedRestaurant.updatedRestaurant 
-          && res.lat === updatedRestaurant.lat && res.long === updatedRestaurant.long
-          && res.address === updatedRestaurant.address);
-    restaurant.ratings.push(review);
   }
 
   const addRestaurant = (restaurant) => {
@@ -39,9 +35,6 @@ const App = () => {
     setFilteredRestaurants(fRests);
   }
 
-  const closeModal = () => {
-    setOpen(false);
-  }
 
   useEffect(() => {
     let rests = [];
@@ -64,7 +57,7 @@ const App = () => {
       {/* AIzaSyCWlhjBQDtztfsfYBMFBhhe7fq4ss81HFw */}
       <Grid>
         <Grid.Column width={12}>
-          <MapDisplayer restaurants={filteredRestaurants} addRestaurant={addRestaurant} setOpen={setOpen} setBody={setBody} />
+          <MapDisplayer restaurants={filteredRestaurants} addRestaurant={addRestaurant} />
         </Grid.Column>
         <Grid.Column width={4}>
           {!detailsView && 
