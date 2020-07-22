@@ -6,7 +6,7 @@ export default class Restaurant {
         this.lat = lat;
         this.long = long;
         this.ratings = ratings;
-        // avgRating
+        this.avgRating = 0
         // noOfRatings
     }
 
@@ -17,6 +17,7 @@ export default class Restaurant {
             sum += this.ratings[i].stars;
         }
         avg = sum / this.ratings.length;
+        this.avgRating = avg;
         return avg;
     }
 }

@@ -31,11 +31,14 @@ const App = () => {
 
   useEffect(() => {
     let rests = [];
-    jsonData.map((res) => {
-      let r = new Restaurant(res.restaurantName, res.address, res.lat, res.long, res.ratings);
-      rests.push(r);
-    });
-    setRestaurants(rests);
+    if (restaurants.length === 0) {
+      jsonData.map((res) => {
+        let r = new Restaurant(res.restaurantName, res.address, res.lat, res.long, res.ratings);
+        r.getAverageRating();
+        rests.push(r);
+      });
+      setRestaurants(rests);
+    }
   }, [jsonData, count])
 
   return (
@@ -49,9 +52,8 @@ const App = () => {
           <MapDisplayer restaurants={restaurants} addRestaurant={addRestaurant} setOpen={setOpen} setBody={setBody} />
         </Grid.Column>
         <Grid.Column width={4}>
-          <Segment>
             {restaurants && <RestaurantList addReview={addReview} restaurants={restaurants} />}
-          </Segment>
+          
         </Grid.Column>
       </Grid>
     </div>

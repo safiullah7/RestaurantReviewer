@@ -23,7 +23,7 @@ const AddRestaurantModal = ({
   const [address, setAddress] = useState("");
 
   const handleSubmit = () => {
-    let newRest = new Restaurant(name, address, lat, long, {});
+    let newRest = new Restaurant(name, address, lat, long, []);
     addRestaurant(newRest);
     setOpen(false);
   };
