@@ -5,6 +5,7 @@ import Restaurant from '../models/restaurant.js';
 import jsonData from '../models/external.json';
 import RestaurantList from '../../features/restaurants/RestaurantList';
 import MapDisplayer from '../../features/maps/MapDisplayer';
+import Filter from '../../features/filter/Filter';
 
 const App = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -12,17 +13,30 @@ const App = () => {
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState(null);
   const [count, setCount] = useState(0);
+  const [minRating, setMinRating] = useState(0);
+  const [maxRating, setMaxRating] = useState(0);
+  const [detailsView, setDetailsView] = useState(false);
 
-  const addReview = (updatedRestaurant) => {
+  const addReview = (updatedRestaurant, review) => {
     // setRestaurants(restaurants);
+    const restaurant = restaurants.filter(res => res.restaurantName === updatedRestaurant.updatedRestaurant 
+          && res.lat === updatedRestaurant.lat && res.long === updatedRestaurant.long
+          && res.address === updatedRestaurant.address);
+    restaurant.ratings.push(review);
   }
 
   const addRestaurant = (restaurant) => {
-    debugger;
     let rests = restaurants;
     rests.push(restaurant)
     setRestaurants(rests);
+    filterRestaurants();
     setCount(count + 1);
+  }
+
+  const filterRestaurants = () => {
+    debugger;
+    const fRests = restaurants.filter(res => res.avgRating >= minRating && res.avgRating <= maxRating);
+    setFilteredRestaurants(fRests);
   }
 
   const closeModal = () => {
@@ -38,6 +52,7 @@ const App = () => {
         rests.push(r);
       });
       setRestaurants(rests);
+      setFilteredRestaurants(rests);
     }
   }, [jsonData, count])
 
@@ -49,10 +64,17 @@ const App = () => {
       {/* AIzaSyCWlhjBQDtztfsfYBMFBhhe7fq4ss81HFw */}
       <Grid>
         <Grid.Column width={12}>
-          <MapDisplayer restaurants={restaurants} addRestaurant={addRestaurant} setOpen={setOpen} setBody={setBody} />
+          <MapDisplayer restaurants={filteredRestaurants} addRestaurant={addRestaurant} setOpen={setOpen} setBody={setBody} />
         </Grid.Column>
         <Grid.Column width={4}>
-            {restaurants && <RestaurantList addReview={addReview} restaurants={restaurants} />}
+          {!detailsView && 
+            <Filter 
+              minRating={minRating} setMinRating={setMinRating} 
+              maxRating={maxRating} setMaxRating={setMaxRating} 
+              filterRestaurants={filterRestaurants} />}
+          
+          {filteredRestaurants && 
+            <RestaurantList addReview={addReview} restaurants={filteredRestaurants} setDetailsView={setDetailsView} />}
           
         </Grid.Column>
       </Grid>

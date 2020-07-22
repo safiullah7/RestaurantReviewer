@@ -15,16 +15,16 @@ import {
 } from "semantic-ui-react";
 import CommentList from "./CommentList";
 
-const RestaurantListItemDetails = ({ addReview, restaurant, setClicked }) => {
-  debugger;
+const RestaurantListItemDetails = ({ addReview, restaurant, setClicked, setDetailsView }) => {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [avgRating, setAvgRating] = useState(restaurant.avgRating);
+  setDetailsView(true);
 
   const handleSubmit = () => {
     const review = { stars: rating, comment: comment };
     restaurant.ratings.push(review);
-    addReview(restaurant);
+    addReview(restaurant, review);
     setAvgRating(restaurant.getAverageRating());
     setComment("");
     setRating(0);
@@ -32,12 +32,13 @@ const RestaurantListItemDetails = ({ addReview, restaurant, setClicked }) => {
 
   const handleBack = () => {
     setClicked(false);
+    setDetailsView(false);
   };
 
   return (
-    <div style={{ margin: "1em" }}>
+    <div style={{ marginTop: '1em', overflow: 'auto', maxHeight: '100vh' }}>
       <Button
-        style={{ right: "12em" }}
+        
         labelPosition="left"
         icon="left chevron"
         content="Back"
