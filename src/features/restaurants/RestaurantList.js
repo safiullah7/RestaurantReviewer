@@ -7,7 +7,7 @@ const RestaurantList = ({addReview, restaurants, setDetailsView}) => {
   const [clicked, setClicked] = useState(false);
   const [restaurant, setRestaurant] = useState(null);
 
-  const handleClick = (restaurant) => {
+  const handleClick = (restaurant) => { 
     setClicked(!clicked);
     
     setRestaurant(restaurant);
@@ -15,13 +15,15 @@ const RestaurantList = ({addReview, restaurants, setDetailsView}) => {
 
     return (
         <>
+            <div style={!clicked ? { marginTop: '1em', overflow: 'auto', maxHeight: '85vh' } : { marginTop: '1em', overflow: 'auto', maxHeight: '100vh' }}>
             {
-                !clicked ? restaurants.map(rest => (
+                !clicked ? restaurants.map((rest, index) => (
                     <RestaurantListItem 
-                        key={`${rest.lat}_${rest.long}`} 
-                        setSelectedRestaurant={setRestaurant} 
-                        handleClick={handleClick} 
-                        restuarant={rest} />
+                        key={index}
+                        setSelectedRestaurant={setRestaurant}
+                        handleClick={handleClick}
+                        restuarant={rest}
+                    />
                 ))
                 :   clicked && restaurant && 
                     (<RestaurantListItemDetails 
@@ -30,6 +32,7 @@ const RestaurantList = ({addReview, restaurants, setDetailsView}) => {
                         setClicked={setClicked}
                         setDetailsView={setDetailsView} />)
             }
+            </div>
         </>
     )
 }

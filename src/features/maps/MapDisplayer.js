@@ -4,9 +4,9 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import L from "leaflet";
 import AddRestaurantModal from './AddRestaurantModal';
 
-const MapDisplayer = ({restaurants, addRestaurant}) => {
+const MapDisplayer = ({restaurants, addRestaurant, currentLocation}) => {
     // const position = [31.507341, 74.380161];
-    const [currentLocation, setCurrentLocation] = useState(null);
+    // const [currentLocation, setCurrentLocation] = useState(null);
     const [lat, setLat] = useState(null);
     const [long, setLong] = useState(null);
     const [open, setOpen] = useState(false);
@@ -18,7 +18,9 @@ const MapDisplayer = ({restaurants, addRestaurant}) => {
     });
     
     const customMarkerRest = new L.icon({
-      iconUrl: "../../../public/images/map.svg",
+      iconUrl: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png",
+      iconSize: [25, 41],
+      iconAnchor: [13, 0],
     });
 
     const closeModal = () => {
@@ -37,13 +39,13 @@ const MapDisplayer = ({restaurants, addRestaurant}) => {
 
     
 
-    useEffect(() => {
-      navigator.geolocation.getCurrentPosition(function(location) {
-        let curLoc = [location.coords.latitude, location.coords.longitude];
-        // location.coords.accuracy;
-        setCurrentLocation(curLoc);
-      });
-    }, [navigator.geolocation.getCurrentPosition])
+    // useEffect(() => {
+    //   navigator.geolocation.getCurrentPosition(function(location) {
+    //     let curLoc = [location.coords.latitude, location.coords.longitude];
+    //     // location.coords.accuracy;
+    //     setCurrentLocation(curLoc);
+    //   });
+    // }, [navigator.geolocation.getCurrentPosition])
     return (
       <>
         {
@@ -56,13 +58,14 @@ const MapDisplayer = ({restaurants, addRestaurant}) => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {currentLocation && 
-            <Marker position={currentLocation} icon={customMarker}>
+            <Marker position={currentLocation} icon={customMarkerRest}>
               <Popup>
                 Your location
               </Popup>
             </Marker>}
-            {restaurants.map(res => (
-              <Marker key={`${res.lat}.${res.long}`} position={[res.lat, res.long]} icon={customMarker}>
+            {
+            restaurants.map((res, index) => (
+              <Marker key={index} position={[res.lat, res.long]} icon={customMarker}>
                 <Popup>
                   {res.restaurantName}
                 </Popup>

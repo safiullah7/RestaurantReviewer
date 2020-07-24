@@ -21,6 +21,10 @@ const RestaurantListItemDetails = ({ addReview, restaurant, setClicked, setDetai
   const [avgRating, setAvgRating] = useState(restaurant.avgRating);
   // setDetailsView(true);
 
+  useEffect(() => {
+    console.log(`${restaurant.lat},${restaurant.long}`)
+  })
+
   const handleSubmit = () => {
     const review = { stars: rating, comment: comment };
     restaurant.ratings.push(review);
@@ -40,7 +44,7 @@ const RestaurantListItemDetails = ({ addReview, restaurant, setClicked, setDetai
   }, [setDetailsView])
 
   return (
-    <div style={{ marginTop: '1em', overflow: 'auto', maxHeight: '100vh' }}>
+    <div>
       <Button
         
         labelPosition="left"
@@ -51,7 +55,7 @@ const RestaurantListItemDetails = ({ addReview, restaurant, setClicked, setDetai
 
       {/* TODO */}
       {/* <Item.Image
-          src={`https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${restaurant.lat},${restaurant.long}&fov=80&heading=70&pitch=0&key=AIzaSyCWlhjBQDtztfsfYBMFBhhe7fq4ss81HFw&signature=safi`}
+          src={`https://maps.googleapis.com/maps/api/streetview?size=300x250&location=${restaurant.lat},${restaurant.long}&fov=80&heading=70&pitch=0&key=AIzaSyC80Tpcm6kMo_grb40sb5oVkj6uubE20ms`}
         /> */}
       <Header as="h3" block>
         {restaurant.restaurantName}
@@ -87,7 +91,7 @@ const RestaurantListItemDetails = ({ addReview, restaurant, setClicked, setDetai
       </Header>
       <Image
         centered
-        src="https://react.semantic-ui.com/images/wireframe/image.png"
+        src={`https://maps.googleapis.com/maps/api/streetview?size=300x250&location=${restaurant.lat},${restaurant.long}&fov=80&heading=70&pitch=0&key=AIzaSyC80Tpcm6kMo_grb40sb5oVkj6uubE20ms`}
         size="medium"
         disabled
       />
