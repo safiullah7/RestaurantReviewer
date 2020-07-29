@@ -31,9 +31,14 @@ const RestaurantListItemDetails = ({
 
   const handleSubmit = () => {
     const review = { stars: rating, comment: comment };
+    if (!restaurant.ratings)
+      restaurant.ratings = [];
     restaurant.ratings.push(review);
+    restaurant.setAvgRating(review, file);
+    
+    console.log(restaurant);
     addReview(restaurant, review);
-    setAvgRating(restaurant.getAverageRating());
+    setAvgRating(restaurant.avgRating);
     setComment("");
     setRating(0);
   };
