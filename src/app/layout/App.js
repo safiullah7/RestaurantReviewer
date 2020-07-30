@@ -7,6 +7,7 @@ import jsonData from '../models/external.json';
 import RestaurantList from '../../features/restaurants/RestaurantList';
 import MapDisplayer from '../../features/maps/MapDisplayer';
 import Filter from '../../features/filter/Filter';
+import Loading from './Loading';
 
 const App = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -20,6 +21,7 @@ const App = () => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [file, setFile] = useState(false);
   const [map, setMap] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const addReview = (updatedRestaurant, review) => {
     // setRestaurants(restaurants);
@@ -68,6 +70,7 @@ const App = () => {
       }
       setRestaurants(rests);
       setFilteredRestaurants(rests);
+      setLoading(false);
     }
   }
 
@@ -82,6 +85,7 @@ const App = () => {
   useEffect(() => {
     let rests = [];
     if (restaurants.length === 0) {
+      setLoading(true);
       if (file) {
         jsonData.map((res) => {
           let r = new Restaurant(res.restaurantName, res.address, res.lat, res.long, res.ratings);
@@ -91,12 +95,12 @@ const App = () => {
         setRestaurants(rests);
         setFilteredRestaurants(rests);
         console.log(filteredRestaurants);
+        setLoading(false);
       }
       else
         googlePlacesNearMe();
-      
     }
-  }, [jsonData, count, file, googlePlacesNearMe, restaurants.length, filterRestaurants, filteredRestaurants])
+  }, [jsonData, count, file, googlePlacesNearMe, restaurants.length, filterRestaurants, filteredRestaurants, loading])
 
   return (
     <div className="App">
@@ -123,6 +127,7 @@ const App = () => {
           }
           
           {
+            !loading ? 
             filteredRestaurants && 
               <RestaurantList 
                 addReview={addReview} 
@@ -131,6 +136,8 @@ const App = () => {
                 map={map}
                 file={file}
               />
+            :
+            <Loading />
           }
         </Grid.Column>
       </Grid>
