@@ -29,19 +29,6 @@ export default class Restaurant {
       this.avgRating = avg;
       return avg;
   }
-//   getAverageRating() {
-//     // avgRating * totalRatings + new rating / totalRatings
-//     let sum = 0;
-//     let avg = 0;
-//     let temp = this.avgRating * this.totalRatings;
-//     for (let i = 0; i < this.ratings.length; i++) {
-//       sum += this.ratings[i].stars;
-//     }
-//     sum += temp;
-//     avg = sum / this.totalRatings;
-//     this.avgRating = avg;
-//     return avg;
-//   }
 
   setAvgRating(review, file) {
     if (file)

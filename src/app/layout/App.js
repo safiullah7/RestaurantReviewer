@@ -15,11 +15,11 @@ const App = () => {
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState(null);
   const [count, setCount] = useState(0);
-  const [minRating, setMinRating] = useState('');
-  const [maxRating, setMaxRating] = useState('');
+  const [minRating, setMinRating] = useState('0');
+  const [maxRating, setMaxRating] = useState('5');
   const [detailsView, setDetailsView] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [file, setFile] = useState(false);
+  const [file, setFile] = useState(true);
   const [map, setMap] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -113,7 +113,7 @@ const App = () => {
       <header className="App-header">
         Restaurant Reviewer
       </header>
-      {/* AIzaSyCWlhjBQDtztfsfYBMFBhhe7fq4ss81HFw */}
+      
       <Grid>
         <Grid.Column width={12}>
           <MapDisplayer 
