@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import RestaurantListItem from './RestaurantListItem'
 import RestaurantListItemDetails from './RestaurantListItemDetails';
-import { Divider } from 'semantic-ui-react';
 
 const RestaurantList = ({addReview, restaurants, setDetailsView, map, file}) => {
   const [clicked, setClicked] = useState(false);

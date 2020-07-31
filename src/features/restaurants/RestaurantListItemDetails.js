@@ -1,7 +1,6 @@
 /* global google */
-import React, { useState, Fragment, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
-  Segment,
   Item,
   Form,
   Label,
@@ -10,7 +9,6 @@ import {
   Image,
   Header,
   Divider,
-  Grid,
   List,
   TextArea,
 } from "semantic-ui-react";

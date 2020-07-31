@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Image, Table } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import CommentListItem from "./CommentListItem";
 
 const CommentList = ({ ratings }) => {

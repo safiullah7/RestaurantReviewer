@@ -1,5 +1,5 @@
 import React from "react";
-import { Loader, Image, Segment, Placeholder } from "semantic-ui-react";
+import { Segment, Placeholder } from "semantic-ui-react";
 
 const Loading = () => (
   <div>

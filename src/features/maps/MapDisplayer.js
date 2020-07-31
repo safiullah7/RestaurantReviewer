@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import 'leaflet/dist/leaflet.css';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import L from "leaflet";
 import AddRestaurantModal from './AddRestaurantModal';
 
 const MapDisplayer = ({restaurants, addRestaurant, currentLocation}) => {
-    // const position = [31.507341, 74.380161];
-    // const [currentLocation, setCurrentLocation] = useState(null);
     const [lat, setLat] = useState(null);
     const [long, setLong] = useState(null);
     const [open, setOpen] = useState(false);
@@ -32,20 +30,8 @@ const MapDisplayer = ({restaurants, addRestaurant, currentLocation}) => {
       setLat(e.latlng.lat);
       setLong(e.latlng.lng);
       setOpen(!open)
-      // open modal > ask for restaurant.js all props except lat long
-      // on save button, push restaurant in restaurants array
-      // show it onto the map
     }
 
-    
-
-    // useEffect(() => {
-    //   navigator.geolocation.getCurrentPosition(function(location) {
-    //     let curLoc = [location.coords.latitude, location.coords.longitude];
-    //     // location.coords.accuracy;
-    //     setCurrentLocation(curLoc);
-    //   });
-    // }, [navigator.geolocation.getCurrentPosition])
     return (
       <>
         {

@@ -1,7 +1,7 @@
 /* global google */
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Grid, Segment } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import Restaurant from '../models/restaurant.js';
 import jsonData from '../models/external.json';
 import RestaurantList from '../../features/restaurants/RestaurantList';
@@ -51,7 +51,6 @@ const App = () => {
         location: pyrmont,
         radius: '500',
         type: ['restaurant']
-        // bounds
       };
       const service = new google.maps.places.PlacesService(map);
       service.nearbySearch(request, callback);
@@ -80,7 +79,6 @@ const App = () => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function(location) {
       let curLoc = [location.coords.latitude, location.coords.longitude];
-      // location.coords.accuracy;
       setCurrentLocation(curLoc);
     });
   }, [navigator.geolocation.getCurrentPosition])
