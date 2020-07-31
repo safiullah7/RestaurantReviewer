@@ -67,12 +67,15 @@ const RestaurantListItemDetails = ({
     setDetailsView(true);
     if (!file && restaurant.ratings && restaurant.ratings.length === 0) {
       setLoading(true);
-      const request = {
-        placeId: restaurant.placeId,
-        // fields: ["name", "rating", "formatted_phone_number", "geometry"],
-      };
-      const service = new google.maps.places.PlacesService(map);
-      service.getDetails(request, callback);
+      if (restaurant.placeId !== "") {
+        const request = {
+          placeId: restaurant.placeId,
+          // fields: ["name", "rating", "formatted_phone_number", "geometry"],
+        };
+        const service = new google.maps.places.PlacesService(map);
+        service.getDetails(request, callback);
+      } else
+        setLoading(false);
     }
   }, [setDetailsView, file, map, restaurant, callback, loading]);
 

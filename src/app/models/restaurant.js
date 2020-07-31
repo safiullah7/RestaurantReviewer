@@ -14,7 +14,7 @@ export default class Restaurant {
     this.lat = lat;
     this.long = long;
     this.ratings = ratings;
-    this.avgRating = avgRating;
+    this.avgRating = Math.round(avgRating);
     this.placeId = placeId;
     this.totalRatings = isNaN(totalRatings) ? 0 : totalRatings;
   }

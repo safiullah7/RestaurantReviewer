@@ -65,8 +65,13 @@ const App = () => {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       let rests = [];
       for (var i = 0; i < results.length; i++) {
-        let r = new Restaurant(results[i].name, results[i].vicinity, results[i].geometry.location.lat(), 
-          results[i].geometry.location.lng(), [], results[i].rating, results[i].place_id);
+        let r = new Restaurant(results[i].name, 
+                              results[i].vicinity, 
+                              results[i].geometry.location.lat(), 
+                              results[i].geometry.location.lng(), 
+                              [], 
+                              results[i].rating, 
+                              results[i].place_id);
         rests.push(r);
       }
       setRestaurants(rests);
