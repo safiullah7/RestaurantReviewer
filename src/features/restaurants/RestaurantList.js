@@ -3,7 +3,7 @@ import RestaurantListItem from './RestaurantListItem'
 import RestaurantListItemDetails from './RestaurantListItemDetails';
 import { Divider } from 'semantic-ui-react';
 
-const RestaurantList = ({addReview, restaurants, setDetailsView}) => {
+const RestaurantList = ({addReview, restaurants, setDetailsView, map, file}) => {
   const [clicked, setClicked] = useState(false);
   const [restaurant, setRestaurant] = useState(null);
 
@@ -25,12 +25,17 @@ const RestaurantList = ({addReview, restaurants, setDetailsView}) => {
                         restuarant={rest}
                     />
                 ))
-                :   clicked && restaurant && 
-                    (<RestaurantListItemDetails 
-                        addReview={addReview} 
-                        restaurant={restaurant}
-                        setClicked={setClicked}
-                        setDetailsView={setDetailsView} />)
+                :   (clicked && restaurant) && 
+                    (
+                        <RestaurantListItemDetails
+                            addReview={addReview} 
+                            restaurant={restaurant}
+                            setClicked={setClicked}
+                            setDetailsView={setDetailsView}
+                            map={map}
+                            file={file}
+                        />
+                    )
             }
             </div>
         </>

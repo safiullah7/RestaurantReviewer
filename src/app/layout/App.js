@@ -7,6 +7,7 @@ import jsonData from '../models/external.json';
 import RestaurantList from '../../features/restaurants/RestaurantList';
 import MapDisplayer from '../../features/maps/MapDisplayer';
 import Filter from '../../features/filter/Filter';
+import Loading from './Loading';
 
 const App = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -19,6 +20,8 @@ const App = () => {
   const [detailsView, setDetailsView] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [file, setFile] = useState(false);
+  const [map, setMap] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const addReview = (updatedRestaurant, review) => {
     // setRestaurants(restaurants);
@@ -45,6 +48,7 @@ const App = () => {
         center: pyrmont,
         zoom: 15
       });
+      setMap(map);
       
       var request = {
         location: pyrmont,
@@ -61,11 +65,13 @@ const App = () => {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       let rests = [];
       for (var i = 0; i < results.length; i++) {
-        let r = new Restaurant(results[i].name, results[i].vicinity, results[i].geometry.location.lat(), results[i].geometry.location.lng(), [], results[i].rating);
+        let r = new Restaurant(results[i].name, results[i].vicinity, results[i].geometry.location.lat(), 
+          results[i].geometry.location.lng(), [], results[i].rating, results[i].place_id);
         rests.push(r);
       }
       setRestaurants(rests);
       setFilteredRestaurants(rests);
+      setLoading(false);
     }
   }
 
@@ -80,6 +86,7 @@ const App = () => {
   useEffect(() => {
     let rests = [];
     if (restaurants.length === 0) {
+      setLoading(true);
       if (file) {
         jsonData.map((res) => {
           let r = new Restaurant(res.restaurantName, res.address, res.lat, res.long, res.ratings);
@@ -89,12 +96,12 @@ const App = () => {
         setRestaurants(rests);
         setFilteredRestaurants(rests);
         console.log(filteredRestaurants);
+        setLoading(false);
       }
       else
         googlePlacesNearMe();
-      
     }
-  }, [jsonData, count, file, googlePlacesNearMe, restaurants.length, filterRestaurants])
+  }, [jsonData, count, file, googlePlacesNearMe, restaurants.length, filterRestaurants, filteredRestaurants, loading])
 
   return (
     <div className="App">
@@ -111,14 +118,28 @@ const App = () => {
         </Grid.Column>
 
         <Grid.Column width={4}>
-          {!detailsView && 
-            <Filter 
-              minRating={minRating} setMinRating={setMinRating} 
-              maxRating={maxRating} setMaxRating={setMaxRating} 
-              filterRestaurants={filterRestaurants} />}
+          {
+            !detailsView && 
+              <Filter 
+                minRating={minRating} setMinRating={setMinRating} 
+                maxRating={maxRating} setMaxRating={setMaxRating} 
+                filterRestaurants={filterRestaurants} 
+              />
+          }
           
-          {filteredRestaurants && 
-            <RestaurantList addReview={addReview} restaurants={filteredRestaurants} setDetailsView={setDetailsView} />}
+          {
+            !loading ? 
+            filteredRestaurants && 
+              <RestaurantList 
+                addReview={addReview} 
+                restaurants={filteredRestaurants} 
+                setDetailsView={setDetailsView} 
+                map={map}
+                file={file}
+              />
+            :
+            <Loading />
+          }
         </Grid.Column>
       </Grid>
     </div>
