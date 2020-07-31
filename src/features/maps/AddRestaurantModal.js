@@ -77,6 +77,7 @@ const AddRestaurantModal = ({
             labelPosition="right"
             content="Save"
             onClick={handleSubmit}
+            disabled={name === "" || address === ""}
           />
         </Modal.Actions>
       </Modal>

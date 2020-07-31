@@ -12,8 +12,6 @@ import Loading from './Loading';
 const App = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [body, setBody] = useState(null);
   const [count, setCount] = useState(0);
   const [minRating, setMinRating] = useState('0');
   const [maxRating, setMaxRating] = useState('5');
@@ -36,7 +34,6 @@ const App = () => {
   }
 
   const filterRestaurants = () => {
-    debugger;
     const fRests = restaurants.filter(res => res.avgRating >= minRating && res.avgRating <= maxRating);
     setFilteredRestaurants(fRests);
   }

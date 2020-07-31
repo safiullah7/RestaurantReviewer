@@ -146,6 +146,7 @@ const RestaurantListItemDetails = ({
               Comment
             </Label>
             <TextArea
+              value={comment}
               placeholder="Comment"
               onChange={(e, { name, value }) => setComment(value)}
             />
@@ -166,7 +167,7 @@ const RestaurantListItemDetails = ({
           </Item.Extra>
         </Form.Group>
         <Form.Group>
-          <Form.Button fluid positive content="Add Review" />
+          <Form.Button fluid positive disabled={comment === "" || rating === 0} content="Add Review" />
         </Form.Group>
       </Form>
     </div>
