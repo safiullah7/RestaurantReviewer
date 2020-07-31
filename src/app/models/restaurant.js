@@ -8,8 +8,8 @@ export default class Restaurant {
         this.ratings = ratings;
         this.avgRating = avgRating;
         // noOfRatings
-        // id
-        //place_id
+        // place_id
+        // check if place_id null/not null, different logic for gettting average when a new review is added 
     }
 
     getAverageRating() {

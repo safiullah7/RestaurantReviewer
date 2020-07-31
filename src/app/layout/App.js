@@ -50,6 +50,7 @@ const App = () => {
         location: pyrmont,
         radius: '500',
         type: ['restaurant']
+        // bounds
       };
       const service = new google.maps.places.PlacesService(map);
       service.nearbySearch(request, callback);
