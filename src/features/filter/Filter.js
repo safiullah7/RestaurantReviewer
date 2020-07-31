@@ -52,7 +52,7 @@ const Filter = ({minRating, setMinRating, maxRating, setMaxRating, filterRestaur
                 options={options}
                 onChange={handleChangeMin}
                 value={minRating}
-            />{' '}
+            />{' to '}
             <Dropdown
                 placeholder='Maximum Rating'
                 compact

@@ -17,7 +17,7 @@ const App = () => {
   const [maxRating, setMaxRating] = useState('5');
   const [detailsView, setDetailsView] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [file, setFile] = useState(true);
+  const [file, setFile] = useState(false);
   const [map, setMap] = useState(null);
   const [loading, setLoading] = useState(false);
 

@@ -14,7 +14,7 @@ const RestaurantList = ({addReview, restaurants, setDetailsView, map, file}) => 
 
     return (
         <>
-            <div style={!clicked ? { marginTop: '1em', overflow: 'auto', maxHeight: '85vh' } : { marginTop: '1em', overflow: 'auto', maxHeight: '100vh' }}>
+            <div style={!clicked ? { marginTop: '1em', overflow: 'auto', maxHeight: '80vh' } : { marginTop: '1em', overflow: 'auto', maxHeight: '100vh' }}>
             {
                 !clicked ? restaurants.map((rest, index) => (
                     <RestaurantListItem 
